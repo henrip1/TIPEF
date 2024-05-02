@@ -1,0 +1,3 @@
+Problématique: "Le paramétrage de modèle (SIR)"
+
+But: A l'aide de donnée sur des virus et autres (ex: codiv) faire un algo permettant de calculer les paramétre, voir même de les ajuster au cours du temps.
