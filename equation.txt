@@ -1,0 +1,15 @@
+dS/dt = -a*S*I/N  -> Sain
+
+dE/dt = a*S*I/n - b*E -> Infecté mais pas contagieux   
+
+dI/dt = b*E -c*I   -> Infecté
+
+dR1/dt = f*c*I     -> Cas confirmés
+
+dR2/dt = (1 - f)*c*I     -> Rétablis
+
+# Paramètres du modèle
+a  # Taux de contact effectif
+b  # Taux auquel les personnes infectées en phase latente deviennent infectieuses
+c  # Taux moyen auquel les personnes infectieuses sont isolées
+f  # Fraction d'individus infectieux comptabilisés parmi les cas confirmés
