@@ -1,3 +1,19 @@
 Problématique: "Le paramétrage de modèle (SIR)"
 
 But: A l'aide de donnée sur des virus et autres (ex: codiv) faire un algo permettant de calculer les paramétre, voir même de les ajuster au cours du temps.
+
+
+
+4/04 : présentation TIPE + …
+
+28/03 :fin implémentation modéle SEIR
+->tests à faire sur les deux modèles
+
+21/03 : fin implémentation modéle SIR + début modéle SEIR + tests
+
+14/03 : implémentation modéle SIR
+->manque de paramètres
+
+7/03 : étude différentes équations du modèles SIRet variants 
+->modéle le + simpliste : SIR
+
