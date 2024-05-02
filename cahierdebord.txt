@@ -17,3 +17,5 @@ But: A l'aide de donnée sur des virus et autres (ex: codiv) faire un algo perme
 7/03 : étude différentes équations du modèles SIRet variants 
 ->modéle le + simpliste : SIR
 
+2/05 : Modéle fini, mtn il faut trouver des techniques d'optimisation pour changer les paramètres du modèle en fonction des données
+
