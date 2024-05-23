@@ -4,7 +4,7 @@ S0, E0, I0, R10, R20 = y
 def calculate_error(params, S0, E0, I0, R10, R20, external_date):
     a, b, c, f = params
     _, _, I, _, _ = equations_SEIR(y, days, a, b, c, f)
-    error = np.mean((S-external_date)**2) + np.mean((E-external_date)**2) + np.mean((I-external_date)**2) + np.mean((R1-external_date)**2) + np.mean((R2-external_date)**2)
+    error = np.mean((S-external_date)**2) + np.mean((I-external_date)**2)
     return error
 
 a_v = []
