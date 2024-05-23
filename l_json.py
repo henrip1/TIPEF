@@ -9,11 +9,12 @@ donnes_nuplets = []
 for objet in donnes:
     nuplet = (
         objet["casConfirmes"], #NULL apcr, il faut le prednre en cmpte dans le code pour ne pas avoir d'erreur
-        objet["deces"]
+        objet["deces"],
+        66992159 - objet["deces"]
         )
     donnes_nuplets.append(nuplet)
 
 #for nuplet in donnes_nuplets:
 #    print(nuplet)
 
-print(donnes_nuplets[10]) # envoie le nuplets que je veux
+print(donnes_nuplets[11]) # envoie le nuplets que je veux
