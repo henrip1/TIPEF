@@ -22,3 +22,6 @@ But: A l'aide de donnée sur des virus et autres (ex: codiv) faire un algo perme
 16/05 : Récupération d'un jeu de données .json des données hospitaliéres covid et algo d'extraction des données (l_json.py)
       	+ nouveaux objectifs: -obtention des paramétres par comparaison
 	  	   	      -reotraction du modéle
+
+
+23/05 : codega calcul d'erreur et finition du code l_json.py
