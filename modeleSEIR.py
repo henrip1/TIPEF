@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 # Fonction décrivant les équations différentielles du modèle SEIR avec deux compartiments retirés
-def equations_SEIR_R(y, t, a, b, c, f):
+def equations_SEIR(y, t, a, b, c, f):
     S, E, I, R1, R2 = y
     N = S + E + I + R1 + R2
     dSdt = -a * S * I / N
