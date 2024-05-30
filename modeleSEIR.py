@@ -32,7 +32,7 @@ c = 0.2  # Taux moyen auquel les personnes infectieuses sont isolées
 f = 0.8  # Fraction d'individus infectieux comptabilisés parmi les cas confirmés
 
 # Exécution de la simulation
-solution = odeint(equations_SEIR_R, y0, t, args=(a, b, c, f))
+solution = odeint(equations_SEIR, y0, t, args=(a, b, c, f))
 S, E, I, R1, R2 = solution.T
 
 # Visualisation des résultats
