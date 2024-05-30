@@ -4,13 +4,10 @@ import l_json
 def calculate_error(params, S0, E0, I0, R10, R20, donnes):
     a, b, c, f = params
     _, _, I, _, _ = equations_SEIR(y, days, a, b, c, f)
-<<<<<<< HEAD
     IR,_,_ = donnes
     error = np.mean((I-IR)**2)
-=======
-    error = np.mean((S-external_date)**2) + np.mean((I-external_date)**2)
->>>>>>> d8fd8a4a48567ad0871a6176c963c2e987904723
-    return error
+    
+return error
 
 S0 = 999999
 E0 = 1
