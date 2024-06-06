@@ -96,7 +96,7 @@ plt.plot(t, R1, label='cas confirmés effacés(SEIR model)')
 plt.plot(t, R2, label='cas non confirmés effacés (SEIR model)')
 plt.xlabel('Jours')
 plt.ylabel('Nombre d individus')
-plt.title('Removed (R1 and R2)')
+plt.title('(R1 et R2)')
 plt.legend()
 
 plt.tight_layout()
