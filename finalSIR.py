@@ -78,22 +78,23 @@ I3= np.array([x[0] for x in donnes_nuplets[0:jours]])
 
 #donnes_nuplets[:200 #slicing
 
-plt.subplot(2, 2, 1)
+plt.subplot(2, 2, 2)
 plt.plot(t, I, label='Infectieux (SIR)')
 plt.legend()
 
-plt.subplot(2, 2, 1)
+plt.subplot(2, 2, 2)
 plt.plot(t, R, label='Rétablis (SIR)')
 plt.xlabel('Jours')
 plt.ylabel('Nombres d individus')
-plt.title('Optimisé')
+plt.title('Optimisée')
 plt.legend()
 
 
 
 
-plt.subplot(2, 2, 2)
+plt.subplot(2, 2, 1)
 plt.plot(t,I3 , label='Infectieux (SIR)')
+plt.ylabel('Nombres d individus')
 plt.legend()
 """
 plt.subplot(2, 2, 2)
