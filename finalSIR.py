@@ -3,6 +3,9 @@ import json
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
+import sys
+
+jours = int(sys.argv[1])
 
 # Charger les données
 with open('synthese-fra.json', 'r') as fichier:
@@ -32,16 +35,16 @@ def equations_SIR(y, t, a, b):
     return dSdt, dIdt, dRdt
 
 # Conditions initiales
-S0 = 999999
+S0 = 66992159
 I0 = 1
 R0 = 0
 y0 = S0, I0, R0
 
 # Temps
-t = np.linspace(0, 200, 200)
+t = np.linspace(0, jours, jours) #(départ,arrivé,occurence)
 
 # Paramétres initiaux
-a, b = 0.23523446569746287, 0.1
+a, b = 0.3, 0.1
 
 # Calcul d'erreur
 def calculate_error(params, S0, I0, R0, donnes):
@@ -57,7 +60,7 @@ def calculate_error(params, S0, I0, R0, donnes):
 ini_params = [a, b]
 
 # Optimisation paramétres
-result = minimize(calculate_error, ini_params, args=(S0, I0, R0, donnes_nuplets[:200]), tol = 0.01 ,method='L-BFGS-B')
+result = minimize(calculate_error, ini_params, args=(S0, I0, R0, donnes_nuplets[:jours]  ), tol = 0.01 ,method='L-BFGS-B')
 a_opt, b_opt = result.x
 print ("a = ",a_opt,", b =",b_opt)
 
@@ -68,8 +71,12 @@ S, I, R = solution.T
 solution2 = odeint(equations_SIR, y0, t, args=(a,b))
 S1, I1 ,R1 = solution2.T
 
+I3= np.array([x[0] for x in donnes_nuplets[0:jours]])
+
+
 # affichage des résultats
 
+#donnes_nuplets[:200 #slicing
 
 plt.subplot(2, 2, 1)
 plt.plot(t, I, label='Infectieux (SIR)')
@@ -84,17 +91,18 @@ plt.legend()
 
 
 
-plt.subplot(2, 2, 2)
-plt.plot(t,donnes_nuplets[:200] , label='Infectieux (SIR)')
-plt.legend()
 
+plt.subplot(2, 2, 2)
+plt.plot(t,I3 , label='Infectieux (SIR)')
+plt.legend()
+"""
 plt.subplot(2, 2, 2)
 plt.plot(t, R, label='Rétablis (SIR)')
 plt.xlabel('Jours')
 plt.ylabel('Nombres d individus')
 plt.title('Données réelles')
 plt.legend()
-
+"""
 
 
 plt.subplot(2, 2, 3)
