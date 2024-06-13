@@ -29,8 +29,8 @@ print(donnes_nuplets[11])
 def equations_SEIR(y, t, a, b, c, f):
     S, E, I, R1, R2 = y
     N = S + E + I + R1 + R2
-    dSdt = -a * S * I / N
-    dEdt = a * S * I / N - b * E
+    dSdt = -a * S * I/N
+    dEdt = a * S * I/N - b * E
     dIdt = b * E - c * I
     dR1dt = f * c * I
     dR2dt = (1 - f) * c * I
@@ -48,7 +48,7 @@ y0 = S0, E0, I0, R10, R20
 t = np.linspace(0, jours, jours)
 
 # Paramétres initiaux
-a, b, c, f = 0.3, 0.1, 0.2, 0.8
+a, b, c, f = 0.3, 0.1, 0.2, 0.2
 
 # Calcul d'erreur
 def calculate_error(params, S0, E0, I0, R10, R20, donnes):

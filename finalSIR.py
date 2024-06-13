@@ -29,8 +29,8 @@ print(donnes_nuplets[11])
 def equations_SIR(y, t, a, b):
     S, I, R = y
     N = S  + I + R
-    dSdt = -a * S * I / N
-    dIdt =  a * S * I / N - b * I
+    dSdt = -a * S * I/N 
+    dIdt =  a * S * I/N  - b * I
     dRdt = b  * I
     return dSdt, dIdt, dRdt
 
@@ -60,7 +60,7 @@ def calculate_error(params, S0, I0, R0, donnes):
 ini_params = [a, b]
 
 # Optimisation paramétres
-result = minimize(calculate_error, ini_params, args=(S0, I0, R0, donnes_nuplets[:jours]  ), tol = 0.01 ,method='L-BFGS-B')
+result = minimize(calculate_error, ini_params, args=(S0, I0, R0, donnes_nuplets[:jours]  ), tol = 0.1 ,method='L-BFGS-B')
 a_opt, b_opt = result.x
 print ("a = ",a_opt,", b =",b_opt)
 
