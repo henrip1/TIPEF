@@ -25,21 +25,21 @@ for objet in donnes:
 # Exemple
 print(donnes_nuplets[11])
 
-# modéle SEIR
+# Modèle SEIR
 def equations_SEIR(y, t, a, b, c, f):
     S, E, I, R1, R2 = y
     N = S + E + I + R1 + R2
-    dSdt = -a * S * I/N
-    dEdt = a * S * I/N - b * E
+    dSdt = -a * S * I / N
+    dEdt = a * S * I / N - b * E
     dIdt = b * E - c * I
     dR1dt = f * c * I
     dR2dt = (1 - f) * c * I
     return dSdt, dEdt, dIdt, dR1dt, dR2dt
 
 # Conditions initiales
-S0 = 999999
+S0 = 66992159 - donnes_nuplets[0][0]
 E0 = 1
-I0 = 0
+I0 = donnes_nuplets[0][0]
 R10 = 0
 R20 = 0
 y0 = S0, E0, I0, R10, R20
@@ -47,7 +47,7 @@ y0 = S0, E0, I0, R10, R20
 # Temps
 t = np.linspace(0, jours, jours)
 
-# Paramétres initiaux
+# Paramètres initiaux
 a, b, c, f = 0.3, 0.1, 0.2, 0.2
 
 # Calcul d'erreur
@@ -60,76 +60,55 @@ def calculate_error(params, S0, E0, I0, R10, R20, donnes):
     error = np.mean((I - casConfirmes)**2)  # Mean squared error
     return error
 
-#Paramétres initiaux
+# Paramètres initiaux
 ini_params = [a, b, c, f]
 
-# Optimisation paramétres
+# Optimisation des paramètres
 result = minimize(calculate_error, ini_params, args=(S0, E0, I0, R10, R20, donnes_nuplets[:jours]), method='L-BFGS-B')
 a_opt, b_opt, c_opt, f_opt = result.x
 
-print ("a = ",a_opt,", b =",b_opt,",c = ",c_opt,", f =",f_opt)
+print("a =", a_opt, ", b =", b_opt, ", c =", c_opt, ", f =", f_opt)
 
-# Simulation avec les paramétres optimisés
+# Simulation avec les paramètres optimisés
 solution = odeint(equations_SEIR, y0, t, args=(a_opt, b_opt, c_opt, f_opt))
 S, E, I, R1, R2 = solution.T
 
-I3= np.array([x[0] for x in donnes_nuplets[0:jours]])
+I3 = np.array([x[0] for x in donnes_nuplets[0:jours]])
 
+# Simulation avec les paramètres initiaux pour comparaison
 solution2 = odeint(equations_SEIR, y0, t, args=(a, b, c, f))
 S1, E1, I1, R11, R21 = solution2.T
 
-
-# affichage des résultats
-#1
+# Affichage des résultats
 plt.figure(figsize=(12, 8))
+
+# Données réelles
 plt.subplot(2, 2, 1)
-plt.plot(t,I3 , label='Infectieux (SEIR)')
-plt.ylabel('Nombres d individus')
+plt.plot(t, I3, label='Infectieux (données réelles)')
+plt.ylabel('Nombre d\'individus')
 plt.legend()
 
-#2
-"""
+# Modèle SEIR optimisé
 plt.subplot(2, 2, 2)
-plt.plot(t, S, label='Susceptible (SEIR)')
+plt.plot(t, E, label='Exposés (modèle SEIR)')
+plt.plot(t, I, label='Infectieux (modèle SEIR)')
+plt.plot(t, R1, label='Cas confirmés récupérés (modèle SEIR)')
+plt.plot(t, R2, label='Cas non confirmés récupérés (modèle SEIR)')
 plt.xlabel('Jours')
-plt.ylabel('Nombre d individus')
-"""
-
-plt.subplot(2, 2, 2)
-plt.plot(t, E, label='Exposés (SEIR model)')
+plt.ylabel('Nombre d\'individus')
+plt.title('Modèle SEIR optimisé')
 plt.legend()
 
-plt.subplot(2, 2, 2)
-plt.plot(t, I, label='Infectieux (SEIR)')
-plt.legend()
-
-plt.subplot(2, 2, 2)
-plt.plot(t, R1, label='cas confirmés effacés(SEIR model)')
-plt.plot(t, R2, label='cas non confirmés effacés (SEIR model)')
+# Modèle SEIR initial
+plt.subplot(2, 2, 3)
+plt.plot(t, E1, label='Exposés (modèle SEIR)')
+plt.plot(t, I1, label='Infectieux (modèle SEIR)')
+plt.plot(t, R11, label='Rétablis (modèle SEIR)')
+plt.plot(t, R21, label='Cas non confirmés récupérés (modèle SEIR)')
 plt.xlabel('Jours')
-plt.ylabel('Nombre d individus')
-plt.title('Optimisée (SEIR)')
+plt.ylabel('Nombre d\'individus')
+plt.title('Modèle SEIR initial')
 plt.legend()
-
-#3
-
-plt.subplot(2, 2, 3)
-plt.plot(t, E1, label='Exposés (SEIR model)')
-plt.legend()
-
-plt.subplot(2, 2, 3)
-plt.plot(t, I1, label='Infectieux (SEIR)')
-plt.legend()
-
-plt.subplot(2, 2, 3)
-plt.plot(t, R11, label='Rétablis (SEIR)')
-plt.plot(t, R21, label='cas non confirmés effacés (SEIR model)')
-plt.xlabel('Jours')
-plt.ylabel('Nombres d individus')
-plt.title('Para ini (SEIR')
-plt.legend()
-
-#4
 
 plt.tight_layout()
 plt.show()
